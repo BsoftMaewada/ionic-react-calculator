@@ -1,4 +1,4 @@
-import { IonCol, IonRow } from "@ionic/react";
+import { IonCol } from "@ionic/react";
 import styles from "./ButtonCol.css";
 
 
