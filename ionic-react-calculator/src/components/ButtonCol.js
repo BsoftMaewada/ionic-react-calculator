@@ -3,7 +3,7 @@ import styles from "./ButtonCol.css";
 
 
 
-function Button (props) {
+function ButtonCol (props) {
 
     const { value, special, clickEvent } = props;
 
@@ -14,4 +14,4 @@ function Button (props) {
     );
 }
 
-export default Button;
+export default ButtonCol;

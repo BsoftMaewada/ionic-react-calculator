@@ -1,5 +1,5 @@
 import { IonRow } from '@ionic/react';
-import styles from '@./ButtonRow.css';
+import styles from './ButtonRow.css';
 
 function ButtonRow (props) {
     <IonRow className={styles.buttonRow}>

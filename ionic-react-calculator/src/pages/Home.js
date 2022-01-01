@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import ButtonCol from '../components/ButtonCol';
 import ButtonRow from '../components/ButtonRow';
 
+import { buttons } from "../keys/Buttons";
 import styles from './Home.css';
 
 function Home() {
@@ -14,7 +15,7 @@ function Home() {
   const [sumHistory, setHistory] = useSate("Ionic React Calculator");
 
 
-  const handleEvent = (e, operator) => {
+  const handleClick = (e, operator) => {
     const tempHistory = sumHistory.replace("Ionic React Calculator", " ");
     if (operator === "=") {
       
@@ -48,18 +49,29 @@ function Home() {
 
   /**============= CALCULATE FUNcTION ============**/
   function calculate() {
+    try {
+      if (setSum(eval(sumHistory).length > 5)) {
+        eval(sumHistory).toFixed(4);
+      } else {
+        eval(sumHistory);
+      }
+      setShowTitle("Ionic Calculator")
+    } catch (e) {
 
+    }
   }
 
   /**============= RESET FUNcTION ============**/
   function reset() {
-
+    setSumHistory("Ionic Calculator");
+    setSum(0);
+    setShowTitle("__________")
   }
 
  /**============= BACKSPACE FUNcTION ============**/
   function backspace() {
-
-
+    const tempSum = sumHistory.substr(0, sumHistory.length - 1);
+    setShowHistory(tempSum);
   }
 
   
@@ -67,15 +79,23 @@ function Home() {
     <IonPage>
       <IonHeader> </IonHeader>
       <IonContent fullscreen>
-
+        <div className={styles.sumContainer}>
+          {showTitle && <h4>{showTitle} </h4>}
+          <p> {sumHistory}</p>
+          <h1 className="animate_animated animate_headShake"> { sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h1>
+        </div>
       </IonContent>
       <IonFooter>
         <IonGrid>
-          <ButtonRow key={index}>
-            {buttons.map((buttonRow,index) => {
-              return <Button key={button.value} value={button.value} special={button.special} clickEvent={button.handleEvent} />; 
-            })}
-          </ButtonRow>
+          {buttons.map((buttonRow, index) => {
+            return (
+              <ButtonRow key={index}>
+                {buttonRow.map((button => {
+                  return <Button key={button.value} value={button.value} special={button.special} clickEvent={handleClick} />;
+                })}
+              </ButtonRow>
+            );
+          } )}
         </IonGrid>
       </IonFooter>
     </IonPage>
