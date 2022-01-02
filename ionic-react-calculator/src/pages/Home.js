@@ -6,13 +6,13 @@ import ButtonCol from '../components/ButtonCol';
 import ButtonRow from '../components/ButtonRow';
 
 import { buttons } from "../keys/Buttons";
-import styles from './Home.css';
+import styles from './HomeStyle.css';
 
-function Home() {
+const Home = () => {
   
   const [showTitle, setShowTitle] = useState("___________");
   const [sum, setSum] = useState("0");
-  const [sumHistory, setHistory] = useSate("Ionic React Calculator");
+  const [sumHistory, setSumHistory] = useState ("Ionic React Calculator");
 
 
   const handleClick = (e, operator) => {
@@ -35,7 +35,7 @@ function Home() {
 
       e.target.classlist.add("animate_headShake");
 
-      setTimer(() => {
+      setTimeout(() => {
         e.target.classlist.remove("animate_headShake");
         
       }, 500);
@@ -48,7 +48,7 @@ function Home() {
   }, [sumHistory]);
 
   /**============= CALCULATE FUNcTION ============**/
-  function calculate() {
+  const calculate = () => {
     try {
       if (setSum(eval(sumHistory).length > 5)) {
         eval(sumHistory).toFixed(4);
@@ -62,16 +62,16 @@ function Home() {
   }
 
   /**============= RESET FUNcTION ============**/
-  function reset() {
+  const reset = () => {
     setSumHistory("Ionic Calculator");
     setSum(0);
     setShowTitle("__________")
   }
 
  /**============= BACKSPACE FUNcTION ============**/
-  function backspace() {
+  const backspace = () => {
     const tempSum = sumHistory.substr(0, sumHistory.length - 1);
-    setShowHistory(tempSum);
+    setSumHistory(tempSum);
   }
 
   
@@ -85,13 +85,15 @@ function Home() {
           <h1 className="animate_animated animate_headShake"> { sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h1>
         </div>
       </IonContent>
-      <IonFooter>
-        <IonGrid>
+
+      <IonFooter className={ styles.calculatorContainer}>
+        <IonGrid className="ion-text-center ion-justify-content-center">
           {buttons.map((buttonRow, index) => {
+
             return (
               <ButtonRow key={index}>
-                {buttonRow.map((button => {
-                  return <Button key={button.value} value={button.value} special={button.special} clickEvent={handleClick} />;
+                {buttonRow.map(button => {
+                  return <ButtonCol key={button.value} value={button.value} special={button.special} clickEvent={handleClick} />;
                 })}
               </ButtonRow>
             );

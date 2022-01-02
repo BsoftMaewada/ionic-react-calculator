@@ -1,9 +1,9 @@
 import { IonCol } from "@ionic/react";
-import styles from "./ButtonCol.css";
+import styles from "./ButtonStyle.css";
 
 
 
-function ButtonCol (props) {
+const ButtonCol = props =>  {
 
     const { value, special, clickEvent } = props;
 
