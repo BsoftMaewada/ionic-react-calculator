@@ -43,7 +43,6 @@ const Home = () => {
   }
 
   useEffect(() => {
-
     calculate();
   }, [sumHistory]);
 
@@ -64,7 +63,7 @@ const Home = () => {
   /**============= RESET FUNcTION ============**/
   const reset = () => {
     setSumHistory("Ionic Calculator");
-    setSum(0);
+    setSum("0");
     setShowTitle("__________")
   }
 
@@ -78,7 +77,7 @@ const Home = () => {
   return (
     <IonPage>
       <IonHeader> </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen="true">
         <div className={styles.sumContainer}>
           {showTitle && <h4>{showTitle} </h4>}
           <p> {sumHistory}</p>
@@ -93,7 +92,7 @@ const Home = () => {
             return (
               <ButtonRow key={index}>
                 {buttonRow.map(button => {
-                  return <ButtonCol key={button.value} value={button.value} special={button.special} clickEvent={handleClick} />;
+                  return <ButtonCol key={ button.value } value={ button.value } special={button.special} clickEvent={handleClick} />;
                 })}
               </ButtonRow>
             );
