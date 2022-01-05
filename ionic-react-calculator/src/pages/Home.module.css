@@ -1,7 +1,13 @@
+/* *{
+    padding: 0;
+    margin: 0;
+    background-color: blanchedalmond;
+} */
+
 .calculatorContainer {
 
     padding-bottom: 2.5rem;
-    background-color: white;
+    background-color: rgb(109, 45, 100);
     padding-left: 1rem;
     padding-right: 1rem;
 }
@@ -14,8 +20,7 @@
     align-items: flex-end;
     padding-right: 2rem;
     margin-top: 2rem;
-
-    background-color: rgba(99, 158, 226, 0.1);
+    background-color: rgba(247, 10, 215, 0.288);
     padding: 2rem;
     padding-top: 4rem;
     padding-bottom: 4rem;
@@ -42,5 +47,5 @@
 
 .sumContainer h4 {
 
-    color: rgb(197, 197, 197);
+    color: rgb(155, 96, 96);
 }

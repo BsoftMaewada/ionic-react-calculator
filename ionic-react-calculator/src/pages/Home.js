@@ -1,27 +1,25 @@
-import React from "react";
 import {
   IonContent,
-  IonPage,
-  IonHeader,
   IonFooter,
   IonGrid,
+  IonHeader,
+  IonPage,
 } from "@ionic/react";
-import { useState, useEffect } from "react";
-
-/*======== Button components =========*/
-import ButtonCol from "../components/ButtonCol";
+import { useEffect, useState } from "react";
+import Button from "../components/ButtonCol";
 import ButtonRow from "../components/ButtonRow";
+import styles from "./Home.module.css";
 
 import { buttons } from "../keys/Buttons";
-import styles from "./HomeStyle.css";
 
 const Home = () => {
-  const [showTitle, setShowTitle] = useState("___________");
+  const [showTitle, setShowTitle] = useState("_______");
   const [sum, setSum] = useState("0");
-  const [sumHistory, setSumHistory] = useState("Ionic React Calculator");
+  const [sumHistory, setSumHistory] = useState("Ionic Calculator");
 
   const handleClick = (e, operator) => {
-    const tempHistory = sumHistory.replace("Ionic React Calculator", " ");
+    const tempSumHistory = sumHistory.replace("Ionic Calculator", "");
+
     if (operator === "=") {
       calculate();
     } else if (operator === "C") {
@@ -29,12 +27,12 @@ const Home = () => {
     } else if (operator === "Del") {
       backspace();
     } else {
-      setSumHistory(tempHistory + operator);
+      setSumHistory(tempSumHistory + operator);
 
-      e.target.classlist.add("animate_headShake");
+      e.target.classList.add("animate__headShake");
 
       setTimeout(() => {
-        e.target.classlist.remove("animate_headShake");
+        e.target.classList.remove("animate__headShake");
       }, 500);
     }
   };
@@ -43,26 +41,23 @@ const Home = () => {
     calculate();
   }, [sumHistory]);
 
-  /**============= CALCULATE FUNcTION ============**/
   const calculate = () => {
     try {
-      if (setSum(eval(sumHistory).length > 5)) {
-        eval(sumHistory).toFixed(4);
-      } else {
-        eval(sumHistory);
-      }
-      setShowTitle("Ionic Calculator");
+      // eslint-disable-next-line no-eval
+      setSum(
+        eval(sumHistory).length > 5
+          ? eval(sumHistory).toFixed(4)
+          : eval(sumHistory)
+      );
+      setShowTitle("");
     } catch (e) {}
   };
 
-  /**============= RESET FUNcTION ============**/
   const reset = () => {
-    setSumHistory("Ionic Calculator");
+    setSumHistory("");
     setSum("0");
-    setShowTitle("__________");
   };
 
-  /**============= BACKSPACE FUNcTION ============**/
   const backspace = () => {
     const tempSum = sumHistory.substr(0, sumHistory.length - 1);
     setSumHistory(tempSum);
@@ -70,13 +65,12 @@ const Home = () => {
 
   return (
     <IonPage>
-      <IonHeader> </IonHeader>
-      <IonContent fullscreen="true">
+      <IonHeader></IonHeader>
+      <IonContent fullscreen>
         <div className={styles.sumContainer}>
-          {showTitle && <h4>{showTitle} </h4>}
-          <p> {sumHistory}</p>
-          <h1 className="animate_animated animate_headShake">
-            {" "}
+          {showTitle && <h4>{showTitle}</h4>}
+          <p>{sumHistory}</p>
+          <h1 className="animate__animated animate__headShake">
             {sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </h1>
         </div>
@@ -89,7 +83,7 @@ const Home = () => {
               <ButtonRow key={index}>
                 {buttonRow.map((button) => {
                   return (
-                    <ButtonCol
+                    <Button
                       key={button.value}
                       value={button.value}
                       special={button.special}

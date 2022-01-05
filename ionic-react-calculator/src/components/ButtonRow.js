@@ -1,9 +1,9 @@
-import React from "react";
+// import React from "react";
 import { IonRow } from "@ionic/react";
-import styles from "./ButtonRow.css";
+import styles from "./ButtonRow.module.css";
 
 const ButtonRow = (props) => (
-  <IonRow className={styles.buttonRow}>{props.children}</IonRow>
+  <IonRow className={ styles.buttonRow }> { props.children } </IonRow>
 );
 
 export default ButtonRow;
